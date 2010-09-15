@@ -1,9 +1,8 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'action_mailer'
+require 'mad_mimi_mail'
 require 'mad_mimi_mailer'
-require 'spec'
-require 'spec/autorun'
+require 'rspec'
 
-Spec::Runner.configure do |config|
-  
-end
+MadMimiMail::Configuration.api_settings = {:email => "example@example.com", :api_key => "abcdefghijklmnopqrstuvwxyz"}
