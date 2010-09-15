@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/mad_mimi_mail.rb",
      "lib/mad_mimi_mailer.rb",
+     "mad_mimi_mailer.gemspec",
      "spec/mad_mimi_mail_spec.rb",
      "spec/mad_mimi_mailer_spec.rb",
      "spec/spec_helper.rb"
