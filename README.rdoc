@@ -1,17 +1,48 @@
 = mad_mimi_mailer
 
-Description goes here.
+== Installation
+Add to your Gemfile:
+  gem 'mad_mimi_mailer'
+Then run
+  $ bundle install
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+Add to environment.rb, or somewhere before your app loads:
+  MadMimiMail::Configuration.api_settings = {:email => "<email>", :api_key => "<api key>"}
 
-== Copyright
+== Usage
+
+=== Create a new mailer using the MadMimiMailer subclass:
+
+  class MyMailer < MadMimiMailer
+    def money_making_email(user)
+      mail({
+        :promotion_name => "rakin' it in",
+        :to => user.email,
+        :subject => "sign up now!" })
+    end
+  end
+
+The following parameters are given to Mimi in addition to the rendered content:
+  :name, :from, :subject, :promotion_name, :list_name, :raw_yaml
+
+http://madmimi.com/developer/mailer/methods
+
+Use your mailer just like ActionMailer::Base, except your emails will be sent via MadMimi.
+  MyMiailer.money_making_email(user).deliver!
+
+
+=== Use ActionMailer::Base and configure individual mailers to use MadMimiMailer :
+
+  class MyMailer < ActionMailer::Base
+   self.delivery_method = :madmimi
+   ...
+  end
+
+
+=== Configure ActionMailer::Base to use Mimi by default:
+This may be useful for switching your default mailer in test and/or development environments
+  MyApp::Application.config.action_mailer.delivery_method = :madmimi
+  ## or ##
+  ActionMailer::Base.delivery_method = :madmimi
 
 Copyright (c) 2010 Nate Jackson. See LICENSE for details.
