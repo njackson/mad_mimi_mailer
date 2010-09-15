@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nate Jackson"]
   s.date = %q{2010-09-15}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{MadMimiMailer plugs into ActionMailer to deliver mail through MadMimi in Rails 3}
   s.email = %q{nate.d.jackson@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Rails3 ActionMailer delivery method for Mad Mimi}
+  s.summary = %q{ActionMailer delivery method for Mad Mimi}
   s.test_files = [
     "spec/mad_mimi_mail_spec.rb",
      "spec/mad_mimi_mailer_spec.rb",
