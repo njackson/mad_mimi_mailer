@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
      "spec/mad_mimi_mailer_spec.rb",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/njackson/mad_mimi_mail}
+  s.homepage = %q{http://github.com/njackson/mad_mimi_mailer}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
