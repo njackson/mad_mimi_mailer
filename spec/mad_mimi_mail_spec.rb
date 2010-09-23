@@ -4,6 +4,7 @@ describe MadMimiMail do
   let(:mimi) { double(MadMimi) }
   before :each do
     MadMimi.stub(:new) { mimi }
+    MadMimiMail::Configuration.api_settings = {:email => "example@example.com", :api_key => "abcdefghijklmnopqrstuvwxyz"}
   end
 
   describe "#new(options)" do
@@ -13,10 +14,19 @@ describe MadMimiMail do
       mimi_mail.settings.should == options
     end
 
-    it "creates a MadMimi object with the email and API key" do
+    it "creates a MadMimi object with the email and API key from Configuration.api_settings" do
       settings = MadMimiMail::Configuration.api_settings
       MadMimi.should_receive(:new).with(settings[:email], settings[:api_key]) { mimi }
       mimi_mail = MadMimiMail.new(settings)
+    end
+
+    context "when Configuration.api_settings is empty" do
+      it "raises an error" do
+        MadMimiMail::Configuration.api_settings = nil
+        lambda {
+          MadMimiMail.new
+        }.should raise_error
+      end
     end
   end
 

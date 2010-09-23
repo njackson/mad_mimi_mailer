@@ -1,6 +1,9 @@
 = mad_mimi_mailer
 
+<b><em>If you're not using ActionMailer 3.0 or later, please use version 0.1.2.1 of mad_mimi_mailer.</em></b>
+
 == Installation
+
 Add to your Gemfile:
   gem 'mad_mimi_mailer'
 Then run
@@ -11,14 +14,19 @@ Add to environment.rb, or somewhere before your app loads:
 
 == Usage
 
-=== Create a new mailer using the MadMimiMailer subclass:
+=== Create a new mailer as a subclass of MadMimiMailer :
 
   class MyMailer < MadMimiMailer
     def money_making_email(user)
-      mail({
+      mimi_params = {
         :promotion_name => "rakin' it in",
         :to => user.email,
-        :subject => "sign up now!" })
+        :subject => "sign up now!" }
+
+      mail(mimi_params).do |format|
+        format.html
+        format.text
+      end
     end
   end
 
@@ -31,7 +39,7 @@ Use your mailer just like ActionMailer::Base, except your emails will be sent vi
   MyMiailer.money_making_email(user).deliver!
 
 
-=== Use ActionMailer::Base and configure individual mailers to use MadMimiMailer :
+=== Use ActionMailer::Base and configure individual mailers:
 
   class MyMailer < ActionMailer::Base
    self.delivery_method = :madmimi
@@ -40,6 +48,7 @@ Use your mailer just like ActionMailer::Base, except your emails will be sent vi
 
 
 === Configure ActionMailer::Base to use Mimi by default:
+
 This may be useful for switching your default mailer in test and/or development environments
   MyApp::Application.config.action_mailer.delivery_method = :madmimi
   ## or ##

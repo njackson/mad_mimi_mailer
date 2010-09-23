@@ -8,7 +8,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "mad_mimi_mailer"
     gem.summary = %Q{ActionMailer delivery method for Mad Mimi}
-    gem.description = %Q{MadMimiMailer plugs into ActionMailer to deliver mail through MadMimi in Rails 3}
+    gem.description = gem.summary
     gem.email = "nate.d.jackson@gmail.com"
     gem.homepage = "http://github.com/njackson/mad_mimi_mailer"
     gem.authors = ["Nate Jackson"]

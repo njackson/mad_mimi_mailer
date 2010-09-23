@@ -5,4 +5,3 @@ require 'mad_mimi_mail'
 require 'mad_mimi_mailer'
 require 'rspec'
 
-MadMimiMail::Configuration.api_settings = {:email => "example@example.com", :api_key => "abcdefghijklmnopqrstuvwxyz"}

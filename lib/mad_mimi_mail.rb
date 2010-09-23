@@ -2,9 +2,12 @@ require 'madmimi'
 require 'action_mailer'
 
 class MadMimiMail
+
   attr_accessor :settings
   def initialize(options)
-    @_mimi = MadMimi.new(Configuration.api_settings[:email], Configuration.api_settings[:api_key])
+    check_api_settings
+
+    @_mimi = MadMimi.new(api_settings[:email], api_settings[:api_key])
     self.settings = options
   end
 
@@ -27,10 +30,26 @@ class MadMimiMail
 
     #if the message isn't an integer, something went wrong and we want to capture it in the mail errors
     mail.errors << mimi_response if transaction_id.zero? 
-
   end
 
   private
+
+  def check_api_settings
+    raise <<-ERROR_STRING.gsub(/^\s+/,'') unless has_required_api_settings?
+      Please configure mad_mimi_mailer with your API settings for MadMimi:
+
+      MadMimiMail::Configuration.api_settings = {:email => "<madmimi email>", :api_key => "<madmimi api key>"}
+    ERROR_STRING
+  end
+
+  def api_settings
+    Configuration.api_settings
+  end
+
+  def has_required_api_settings?
+    api_settings && [:email, :api_key].all? {|k| api_settings.has_key?(k) }
+  end
+
   def extract_header(mail, header)
     if mail[header].to_s.blank?
       nil
